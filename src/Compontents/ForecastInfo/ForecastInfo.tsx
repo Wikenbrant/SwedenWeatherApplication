@@ -10,6 +10,7 @@ import {
   Paper,
   Grid
 } from "@material-ui/core";
+
 import { useStyles } from "../../Helper/Hooks/useStyles ";
 
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -48,6 +49,16 @@ const ForecastInfo: React.FC<Props> = ({
     weather: dayAfterTomorrowWeather,
     setForecast: setDayAfterTomorrowForecast
   } = useDisplayWeather(2, forecast);
+
+  const {
+    weather: day4Weather,
+    setForecast: setDay4Forecast
+  } = useDisplayWeather(3, forecast);
+
+  const {
+    weather: day5Weather,
+    setForecast: setDay5Forecast
+  } = useDisplayWeather(4, forecast);
   const classes = useStyles();
 
   useEffect(() => {
@@ -55,16 +66,20 @@ const ForecastInfo: React.FC<Props> = ({
       setTodaysForecast(forecast);
       setTomorrowForecast(forecast);
       setDayAfterTomorrowForecast(forecast);
+      setDay4Forecast(forecast);
+      setDay5Forecast(forecast);
     }
   }, [
     forecast,
+    setDay4Forecast,
+    setDay5Forecast,
     setDayAfterTomorrowForecast,
     setTodaysForecast,
     setTomorrowForecast
   ]);
 
   return (
-    <TableContainer className={classes.table} component={Paper}>
+    <TableContainer component={Paper}>
       <Table>
         <TableHead>
           <TableRow>
@@ -105,34 +120,38 @@ const ForecastInfo: React.FC<Props> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {[todaysWeather, tomorrowWeather, dayAfterTomorrowWeather].map(
-            (weather, index) => (
-              <TableRow key={index}>
-                <TableCell component="th" scope="row">
-                  {weather.date}
-                </TableCell>
-                <TableCell align="right">
-                  <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                      <img src={weather.weatherSymbolUrl} alt="WeatherSymbol" />
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                          {weather.maxTemp}
-                        </Grid>
-                        <Grid item xs={12}>
-                          {weather.minTemp}
-                        </Grid>
+          {[
+            todaysWeather,
+            tomorrowWeather,
+            dayAfterTomorrowWeather,
+            day4Weather,
+            day5Weather
+          ].map((weather, index) => (
+            <TableRow key={index}>
+              <TableCell component="th" scope="row">
+                {weather.date}
+              </TableCell>
+              <TableCell align="right">
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <img src={weather.weatherSymbolUrl} alt="WeatherSymbol" />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Grid container spacing={1}>
+                      <Grid item xs={12}>
+                        {weather.maxTemp}
+                      </Grid>
+                      <Grid item xs={12}>
+                        {weather.minTemp}
                       </Grid>
                     </Grid>
                   </Grid>
-                </TableCell>
-                <TableCell align="right">{weather.precipitation}</TableCell>
-                <TableCell align="right">{weather.windSpeed}</TableCell>
-              </TableRow>
-            )
-          )}
+                </Grid>
+              </TableCell>
+              <TableCell align="right">{weather.precipitation}</TableCell>
+              <TableCell align="right">{weather.windSpeed}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

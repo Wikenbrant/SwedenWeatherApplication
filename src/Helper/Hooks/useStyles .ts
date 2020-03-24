@@ -6,7 +6,6 @@ export const useStyles = makeStyles(theme =>
       height: 150,
       width: "70%",
       marginTop: theme.spacing(5)
-    },
-    table: {}
+    }
   })
 );
