@@ -1,0 +1,24 @@
+.infoContainer {
+    margin: 20px;
+    padding: 20px;
+    max-height: 100px;
+    max-width: 170px;
+    border-radius: 15px;
+    display: grid;
+    grid-template-areas: "H H" "L R";
+    box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.5);
+    align-items: center;
+}
+
+.infoContainer .infoHeader {
+    grid-area: H;
+    text-align: center;
+}
+
+.infoContainer .info .right {
+    grid-area: R;
+}
+
+.infoContainer .info .left {
+    grid-area: L;
+}

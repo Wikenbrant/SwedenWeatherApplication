@@ -1,0 +1,26 @@
+.mapContainer {
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 1fr 100px;
+}
+
+.swedenMap {
+    box-sizing: content-box;
+    height: 100%;
+    width: auto;
+}
+
+.swedenMap path {
+    position: relative;
+    fill: #cccccc;
+    fill-opacity: 1;
+    stroke: white;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+}
+
+.swedenMap path:hover {
+    fill: rgb(161, 161, 161);
+}
