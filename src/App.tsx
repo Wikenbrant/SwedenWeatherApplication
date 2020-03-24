@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import "./App.css";
 import useWeatherForecast from "./Helper/Hooks/useWeatherForecast";
 import SwedenMap from "./Compontents/SwedenMap/SwedenMap";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import GpsFixedIcon from "@material-ui/icons/GpsFixed";
-import GpsOffIcon from "@material-ui/icons/GpsOff";
+import Playbar from "./Compontents/Playbar/Playbar";
+import { Grid } from "@material-ui/core";
 import ForecastInfo from "./Compontents/ForecastInfo/ForecastInfo";
 
 function App() {
   const {
-    forecast,
+    forecast: forecasts,
     forecastLocation,
     useCurrentLocation,
     setUseCurrentLocation,
@@ -26,40 +24,66 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
-    <div className="App">
-      <div>
-        <ToggleButton
-          value="Use GPS"
-          selected={useCurrentLocation}
-          onChange={() => {
-            setUseCurrentLocation(!useCurrentLocation);
-          }}
+    <Grid
+      container
+      style={{ padding: 40 }}
+      direction="column"
+      alignContent="center"
+      alignItems="center"
+    >
+      <Grid item xs={12}>
+        <Grid
+          container
+          spacing={5}
+          direction="row"
+          alignContent="center"
+          alignItems="flex-start"
         >
-          {useCurrentLocation ? (
-            <GpsFixedIcon color="primary" />
-          ) : (
-            <GpsOffIcon />
-          )}
-        </ToggleButton>
-        <ForecastInfo
-          forecast={forecast}
-          location={forecastLocation}
-          currentIndex={currentIndex}
-        />
-      </div>
-      <SwedenMap
-        currentIndex={currentIndex}
-        setCurrentIndex={setCurrentIndex}
-        setlatitude={setLatitude}
-        setlongitude={setLongitude}
-        forecasts={forecast}
-        norrbotten={norrbotten}
-        stockholm={stockholm}
-        vastraGotaland={vastraGotaland}
-        skane={skane}
-        jamtland={jamtland}
-      />
-    </div>
+          <Grid item xs={6}>
+            {forecasts ? (
+              <ForecastInfo
+                setlatitude={setLatitude}
+                setlongitude={setLongitude}
+                forecast={forecasts}
+                location={forecastLocation}
+                setUseCurrentLocation={setUseCurrentLocation}
+                useCurrentLocation={useCurrentLocation}
+              />
+            ) : (
+              <></>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            <Grid container direction="column">
+              <Grid item xs={12}>
+                <SwedenMap
+                  currentIndex={currentIndex}
+                  setlatitude={setLatitude}
+                  setlongitude={setLongitude}
+                  forecasts={forecasts}
+                  norrbotten={norrbotten}
+                  stockholm={stockholm}
+                  vastraGotaland={vastraGotaland}
+                  skane={skane}
+                  jamtland={jamtland}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                {forecasts ? (
+                  <Playbar
+                    forecasts={forecasts}
+                    setCurrentIndex={setCurrentIndex}
+                  />
+                ) : (
+                  <></>
+                )}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item xs={12}></Grid>
+    </Grid>
   );
 }
 

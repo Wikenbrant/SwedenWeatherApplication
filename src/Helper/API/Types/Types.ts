@@ -56,16 +56,6 @@ export enum Months {
 export interface Forecast {
   validTime: Date;
   parameters: [
-    PercentOfPrecipitationInFrozenForm,
-    PrecipitationCategory,
-    MinimumPrecipitationIntensity,
-    MeanPrecipitationIntensity,
-    MaximumPrecipitationIntensity,
-    MedianPrecipitationIntensity,
-    MeanValueOfTotalCloudCover,
-    MeanValueOfLowCloudCover,
-    MeanValueOfMediumCloudCover,
-    MeanValueOfHighCloudCover,
     AirPressure,
     AirTemprature,
     HorizontalVisibility,
@@ -73,7 +63,17 @@ export interface Forecast {
     WindSpeed,
     RelativeHumidity,
     ThunderProbability,
+    MeanValueOfTotalCloudCover,
+    MeanValueOfLowCloudCover,
+    MeanValueOfMediumCloudCover,
+    MeanValueOfHighCloudCover,
     WindGustSpeed,
+    MinimumPrecipitationIntensity,
+    MaximumPrecipitationIntensity,
+    PercentOfPrecipitationInFrozenForm,
+    PrecipitationCategory,
+    MeanPrecipitationIntensity,
+    MedianPrecipitationIntensity,
     WeatherSymbol
   ];
 }

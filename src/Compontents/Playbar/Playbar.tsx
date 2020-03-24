@@ -4,6 +4,7 @@ import { useStyles } from "../../Helper/Hooks/useStyles ";
 import { SMHIResponse, Days } from "../../Helper/API/Types/Types";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
+import "./Playbar.css";
 
 interface Props {
   forecasts: SMHIResponse;
@@ -49,7 +50,7 @@ const Playbar: React.FC<Props> = ({ forecasts, setCurrentIndex }) => {
           forecast.validTime
         ).getHours()}:${new Date(forecast.validTime).getMinutes()}0`}
       </p>
-      <div>
+      <div className="playbarContainer">
         <div>
           {isPlaying ? (
             <PauseIcon
@@ -67,7 +68,10 @@ const Playbar: React.FC<Props> = ({ forecasts, setCurrentIndex }) => {
         </div>
         <Slider
           value={value}
-          onChange={(e, newValue) => setValue(newValue as number)}
+          onChange={(e, newValue) => {
+            setValue(newValue as number);
+            setCurrentIndex(value);
+          }}
           valueLabelDisplay="off"
           step={1}
           min={1}

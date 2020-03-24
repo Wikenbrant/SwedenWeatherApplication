@@ -4,7 +4,6 @@ import Paths from "./Paths/Paths";
 import { SMHIResponse } from "../../Helper/API/Types/Types";
 import ShortInfo from "./ShortInfo";
 import useBoundingBox from "../../Helper/Hooks/useBoundingBox";
-import Playbar from "../Playbar/Playbar";
 
 interface Props {
   setlatitude: (newLatitude: number) => void;
@@ -16,7 +15,6 @@ interface Props {
   skane?: SMHIResponse;
   jamtland?: SMHIResponse;
   currentIndex: number;
-  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SwedenMap: React.FC<Props> = ({
@@ -28,8 +26,7 @@ const SwedenMap: React.FC<Props> = ({
   vastraGotaland,
   skane,
   jamtland,
-  currentIndex,
-  setCurrentIndex
+  currentIndex
 }) => {
   const handleHover = (event: React.MouseEvent<SVGPathElement, MouseEvent>) => {
     const latitude = +event.currentTarget.attributes.getNamedItem(
@@ -41,6 +38,7 @@ const SwedenMap: React.FC<Props> = ({
 
     setlatitude(latitude);
     setlongitude(longitude);
+    event.currentTarget.classList.toggle("hover");
   };
 
   const [norrbottenBoundingBox, setNorrbottenBoundingBox] = useState(
@@ -58,10 +56,11 @@ const SwedenMap: React.FC<Props> = ({
   const { ref, boundingBox } = useBoundingBox<HTMLDivElement>();
 
   return (
-    <div className="mapContainer" ref={ref}>
+    <div ref={ref} style={{ position: "relative" }}>
       <svg viewBox="0 0 345.62482 792.52374" className="swedenMap">
         <Paths
           onMouseOver={handleHover}
+          onMouseLeave={e => e.currentTarget.classList.toggle("hover")}
           setNorrbottenBoundingBox={setNorrbottenBoundingBox}
           setStockholmBoundingBox={setStockholmBoundingBox}
           setVastraGotalandBoundingBox={setVastraGotalandBoundingBox}
@@ -71,40 +70,50 @@ const SwedenMap: React.FC<Props> = ({
       </svg>
 
       <ShortInfo
+        setlatitude={setlatitude}
+        setlongitude={setlongitude}
         currentIndex={currentIndex}
         forecasts={norrbotten}
         objectRect={norrbottenBoundingBox}
         parrentRect={boundingBox}
+        id={"SE-BD"}
       />
       <ShortInfo
+        setlatitude={setlatitude}
+        setlongitude={setlongitude}
         currentIndex={currentIndex}
         forecasts={jamtland}
         objectRect={jamtlandBoundingBox}
         parrentRect={boundingBox}
+        id={"SE-Z"}
       />
       <ShortInfo
+        setlatitude={setlatitude}
+        setlongitude={setlongitude}
         currentIndex={currentIndex}
         forecasts={stockholm}
         objectRect={stockholmBoundingBox}
         parrentRect={boundingBox}
+        id={"SE-AB"}
       />
       <ShortInfo
+        setlatitude={setlatitude}
+        setlongitude={setlongitude}
         currentIndex={currentIndex}
         forecasts={vastraGotaland}
         objectRect={vastraGotalandBoundingBox}
         parrentRect={boundingBox}
+        id={"SE-O"}
       />
       <ShortInfo
+        setlatitude={setlatitude}
+        setlongitude={setlongitude}
         currentIndex={currentIndex}
         forecasts={skane}
         objectRect={skaneBoundingBox}
         parrentRect={boundingBox}
+        id={"SE-M"}
       />
-      {forecasts ? (
-        <Playbar forecasts={forecasts} setCurrentIndex={setCurrentIndex} />
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

@@ -31,6 +31,7 @@ interface Props extends React.SVGProps<SVGPathElement> {
 
 const Paths: React.FC<Props> = ({
   onMouseOver,
+  onMouseLeave,
   setNorrbottenBoundingBox,
   setSkaneBoundingBox,
   setStockholmBoundingBox,
@@ -39,42 +40,47 @@ const Paths: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Blekinge onMouseOver={onMouseOver} />
-      <Gotland onMouseOver={onMouseOver} />
-      <Gavleborg onMouseOver={onMouseOver} />
-      <Halland onMouseOver={onMouseOver} />
+      <Blekinge onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Gotland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Gavleborg onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Halland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
       <Jamtland
         onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
         setJamtlandBoundingBox={setJamtlandBoundingBox}
       />
-      <Jonkoping onMouseOver={onMouseOver} />
-      <Kalmar onMouseOver={onMouseOver} />
-      <Dalarna onMouseOver={onMouseOver} />
-      <Kronoberg onMouseOver={onMouseOver} />
+      <Jonkoping onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Kalmar onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Dalarna onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Kronoberg onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
       <Norrbotten
         onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
         setNorrbottenBoundingBox={setNorrbottenBoundingBox}
       />
-      <Ostergotland onMouseOver={onMouseOver} />
-      <Orebro onMouseOver={onMouseOver} />
-      <Sodermanland onMouseOver={onMouseOver} />
+      <Ostergotland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Orebro onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Sodermanland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
       <Skane
         onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
         setSkaneBoundingBox={setSkaneBoundingBox}
       />
       <Stockholm
         onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
         setStockholmBoundingBox={setStockholmBoundingBox}
       />
-      <Uppsala onMouseOver={onMouseOver} />
-      <Vasterbotten onMouseOver={onMouseOver} />
+      <Uppsala onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Vasterbotten onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
       <VastraGotaland
         onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
         setVastraGotalandBoundingBox={setVastraGotalandBoundingBox}
       />
-      <Varmland onMouseOver={onMouseOver} />
-      <Vasternorrland onMouseOver={onMouseOver} />
-      <Vastmanland onMouseOver={onMouseOver} />
+      <Varmland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Vasternorrland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
+      <Vastmanland onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} />
     </>
   );
 };
